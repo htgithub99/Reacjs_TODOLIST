@@ -38,7 +38,8 @@ export default function ViewTodolist({match}) {
     }
 
     const handChange = (event, type) => {
-        setContent(_.map(content, (i, index) => i = _.assign(i, { did: type.id === i.id ? event.checked : i.checked })))
+        setContent(_.map(content, (i, index) => i = _.assign(i, { did: type.id === i.id ? event.checked : i.did })))
+        console.log('content', content);
     }
     return (
         <div match={match}>
