@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+//font input
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Tangerine:wght@700&display=swap');
+body {
+    font-family: 'Lobster', cursive;
+}
+.todolist {
+    margin: 0 auto;
+    background: white;
+    border-radius: 9px;
+    border: 1px solid #e7ecfb;
+    box-shadow: 0 0 30px rgba(211, 220, 248, .3);
+    padding: 30px;
+    width: 500px;
+
+    .top___todolist {
+        .top___todolist---input {
+            margin: 10px 0;
+            input {
+                font-family: 'Tangerine', cursive;
+                font-size: 24px;
+                font-weight: 800;
+                border: 1px solid #e7ecfb;
+                border-radius: 9px;
+                color: #666f99;
+                padding: 9px 18px;
+                width: 90%;
+
+                &:focus {
+                    outline: none;
+                    border: 1px solid #e7ecfb;
+                    box-shadow: 0 0 12px rgba(211, 220, 248, .3);
+                }
+            }
+        }
+
+        .top___todolist---submit {
+            text-align: right;
+            button {
+                font-family: 'Lobster', cursive;
+                height: 100%;
+                padding: 0 18px;
+                background: transparent;
+                border: 0;
+                color: #666f99;
+                cursor: pointer;
+                font-size: 18px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+    .todolist___work {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0 10px 25px;
+        margin: 0 0 10px;
+        border-radius: 3px;
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        .todolist___work---button {
+            button {
+                font-family: 'Lobster', cursive;
+                height: 100%;
+                padding: 0 18px;
+                background: transparent;
+                border: 0;
+                color: #666f99;
+                cursor: pointer;
+                font-size: 18px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .bg__todolist {
+        background: #99FF66;
+    }
+}

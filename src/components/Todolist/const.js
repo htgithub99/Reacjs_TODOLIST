@@ -1,0 +1,2 @@
+export const GET_DATA_LOCAL = localStorage.getItem('DATA_LIST') ? JSON.parse(localStorage.getItem('DATA_LIST')) : [];
+export const SET_DATA_LOCAL = localStorage.setItem('DATA_LIST', JSON.stringify(LIST_TODO));
