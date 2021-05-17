@@ -1,5 +1,7 @@
 import * as _ from 'lodash'
 import React, {useState} from 'react';
+import BtnAddWork from './BtnAddWork';
+import FormAddWork from './FormAddWork';
 import ListWork from './ListWork';
 
 
@@ -46,13 +48,12 @@ export default function ViewTodolist({match}) {
             <div className="todolist">
                 <div style={{textAlign: 'center'}}> To do List </div>
                 <div className="top___todolist">
-                    <div className="top___todolist---input">
-                        <input onChange={(event) => setMemorize(event.target.value)}/>
-                    </div>
-                    <div className="top___todolist---submit">
-                        <button onClick={() => handleCreate()}>Create</button>
-                    </div>
+                    {/* form add work item */}
+                    <FormAddWork/>
+                     {/* tạo componet button create work item*/}
+                    <BtnAddWork handleCreate={handleCreate}/>
                 </div>
+                {/* list work item */}
                 <ListWork content={content} handleDelete={handleDelete} handChange={handChange}/>
             </div>
         </div>
