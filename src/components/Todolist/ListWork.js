@@ -7,7 +7,7 @@ const ListWork =  ({content, handChange, handleDelete}) => {
             {
                 _.map(content, (items, index) => {
                     return (
-                        <WorkItem key={index} items={items} handleDelete={handleDelete} handChange={handChange}/>
+                        <WorkItem key={items.id} items={items} handleDelete={handleDelete} handChange={handChange}/>
                     )
                 })
             }
