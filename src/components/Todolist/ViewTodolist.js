@@ -6,8 +6,8 @@ import ListWork from './ListWork';
 import callApi from '../../api/admin/callApi';
 
 export default function ViewTodolist({match}) {
-    
-    const [memorize, setMemorize] = useState('')
+    // eslint-disable-next-line
+    // const [memorize, setMemorize] = useState('')
     const [content, setContent] = useState()
 
     /*Hàm này được chạy khi có sự thay đổi ví dụ như delete, create, update item => componentDidUpdate */
@@ -22,22 +22,44 @@ export default function ViewTodolist({match}) {
                 console.log('get fail')
             }
         }
-
         getApi()
     }, []); 
-    const handleCreate = () => {
-        const asc = content[content.length - 1] ? content[content.length - 1].id + 1 : 1
+    
+    const handleCreate = (event) => {
+        const memorize = event.target.value
         const items = {
-            id: asc,
             name: memorize,
-            did: false
+            status: 'new'
         }
-        setContent([...content, items])
+        const adds = async () => {
+            try {
+                await callApi.create(items)
+                const addsawait = await callApi.get({})
+                setContent(addsawait.data)
+            }
+            catch {
+                console.log('Create faild');
+            }
+        }
+        if(event.key === 'Enter') {
+            adds()
+        }
     }
 
     const handleDelete = (event) => {
         const idList = event.id
-        setContent(_.filter(content, (i, index) => i.id !== idList))
+        const deletes = async () => {
+            try {
+                await callApi.deletes(idList)
+                const deletesawait = await callApi.get({})
+                setContent(deletesawait.data)
+            }
+            catch {
+                console.log('delete faild');
+            }
+        }
+
+        deletes ()
     }
 
     const handChange = (event, items) => {
@@ -50,7 +72,7 @@ export default function ViewTodolist({match}) {
                 <div style={{textAlign: 'center'}}> To do List </div>
                 <div className="top___todolist">
                     {/* form add work item */}
-                    <FormAddWork setMemorize={setMemorize}/>
+                    <FormAddWork handleCreate={handleCreate}/>
                      {/* tạo componet button create work item*/}
                     <BtnAddWork handleCreate={handleCreate}/>
                 </div>
