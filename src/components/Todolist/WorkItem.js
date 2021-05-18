@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames';
 
-export default function WorkItem({items, handChange, handleDelete, index}) {
+export default function WorkItem({items, handChange, handleDelete}) {
   return (
-    <div className={classNames('todolist___work', { bg__todolist: items.did })} key={index}>
+    <div className={classNames('todolist___work', { bg__todolist: items.did })} key={items.id}>
       <ul>
           <li>{items.name}</li>
       </ul>
