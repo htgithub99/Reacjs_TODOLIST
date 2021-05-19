@@ -63,6 +63,18 @@ body {
             padding: 0;
         }
         .todolist___work---button {
+            .bg__status_new {
+                background-color: #66b3ff;
+            }
+            .bg__status_done {
+                background-color: #d966ff;
+            }
+            .bg__status_doing {
+                background-color: #66ff66;
+            }
+            .bg__status_pedding {
+                background-color: #ff3333;
+            }
             button {
                 font-family: 'Lobster', cursive;
                 height: 100%;
@@ -77,6 +89,7 @@ body {
                 }
             }
         }
+        
     }
 
     .bg__todolist {
