@@ -13,13 +13,21 @@ export default function FormAddWork({ handleCreate }) {
   };
 
   return (
-    <div className="top___todolist---input">
-      <input
-        type="text"
-        onChange={(e) => handelCreateChild(e)}
-        value={memorize}
-        onKeyDown={(e) => handelCreateChild(e)}
-      />
-    </div>
+    <>
+      <div className="top___todolist---input">
+        <input
+          type="text"
+          onChange={(e) => handelCreateChild(e)}
+          value={memorize}
+          onKeyDown={(e) => handelCreateChild(e)}
+        />
+      </div>
+      <div className="top___todolist---submit">
+          <button onClick={() => {
+            handleCreate(memorize);
+            setMemorize("");
+          }}>Create</button>
+      </div>
+    </>
   );
 }

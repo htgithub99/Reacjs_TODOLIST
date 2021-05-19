@@ -1,6 +1,5 @@
 import * as _ from 'lodash'
 import React, { useState, useEffect } from 'react';
-import BtnAddWork from './BtnAddWork';
 import FormAddWork from './FormAddWork';
 import ListWork from './ListWork';
 import callApi from '../../api/admin/callApi';
@@ -25,9 +24,13 @@ export default function ViewTodolist({match}) {
         getApi()
     }, []); 
     
+<<<<<<< HEAD
     const handleCreate = (e) => {
+=======
+    const handleCreate = (todo) => {
+>>>>>>> c355006f6734336d9e8b68eb49e71eb59405475b
         const items = {
-            name: e,
+            name: todo,
             status: 'new'
         }
         const adds = async () => {
@@ -41,8 +44,6 @@ export default function ViewTodolist({match}) {
             }
         }
         adds()
-        // if(event.key === 'Enter' || event.type === 'click')
-        //     if (memorize !== '')
     }
 
     const handleDelete = (e) => {
@@ -72,8 +73,6 @@ export default function ViewTodolist({match}) {
                 <div className="top___todolist">
                     {/* form add work item */}
                     <FormAddWork handleCreate={handleCreate} />
-                     {/* tạo componet button create work item*/}
-                    <BtnAddWork handleCreate={handleCreate}/>
                 </div>
                 {/* list work item */}
                 <ListWork todos={todos} handleDelete={handleDelete} handChange={handChange}/>
