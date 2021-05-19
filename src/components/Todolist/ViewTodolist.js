@@ -7,7 +7,7 @@ import callApi from '../../api/admin/callApi';
 
 export default function ViewTodolist({match}) {
     // eslint-disable-next-line
-    const [memorize, setMemorize] = useState('')
+    // const [memorize, setMemorize] = useState('')
     const [content, setContent] = useState()
 
     /*Hàm này được chạy khi có sự thay đổi ví dụ như delete, create, update item => componentDidUpdate */
@@ -25,9 +25,11 @@ export default function ViewTodolist({match}) {
         getApi()
     }, []); 
     
-    const handleCreate = (event) => {
+    const handleCreate = (e) => {
+        console.log('parent', e);
+        // const memorize = e.target.value
         const items = {
-            name: memorize,
+            name: e,
             status: 'new'
         }
         const adds = async () => {
@@ -40,9 +42,9 @@ export default function ViewTodolist({match}) {
                 console.log('Create faild');
             }
         }
-        if(event.key === 'Enter' || event.type === 'click')
-            if (memorize !== '')
-                adds()
+        adds()
+        // if(event.key === 'Enter' || event.type === 'click')
+        //     if (memorize !== '')
     }
 
     const handleDelete = (event) => {
@@ -71,7 +73,7 @@ export default function ViewTodolist({match}) {
                 <div style={{textAlign: 'center'}}> To do List </div>
                 <div className="top___todolist">
                     {/* form add work item */}
-                    <FormAddWork handleCreate={handleCreate} setMemorize={setMemorize}/>
+                    <FormAddWork handleCreate={handleCreate} />
                      {/* tạo componet button create work item*/}
                     <BtnAddWork handleCreate={handleCreate}/>
                 </div>

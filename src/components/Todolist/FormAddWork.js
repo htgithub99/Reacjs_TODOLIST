@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function FormAddWork({setMemorize, handleCreate}) {
+export default function FormAddWork({handleCreate}) {
+  const [memorize, setMemorize] = useState('')
+
+  const handelCreateChild = (e) => {
+    console.log(e);
+    if (e.keyCode === 13) {
+      handleCreate(memorize);
+      setMemorize('');
+    } else {
+      setMemorize(e.target.value)
+    }
+  }
   return (
     <div className="top___todolist---input">
-      <input onKeyPress={(event) => handleCreate(event)} onChange={(event) => setMemorize(event.target.value)}/>
+      <input type="text" onChange={(e) => handelCreateChild(e)} value={memorize} />
     </div>
   )
 }
