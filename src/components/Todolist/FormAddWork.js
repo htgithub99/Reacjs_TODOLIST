@@ -4,7 +4,7 @@ export default function FormAddWork({ handleCreate }) {
   const [memorize, setMemorize] = useState("");
 
   const handelCreateChild = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && memorize !== '') {
       handleCreate(memorize);
       setMemorize("");
     } else {
