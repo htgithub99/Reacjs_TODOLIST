@@ -8,7 +8,7 @@ import callApi from '../../api/admin/callApi';
 export default function ViewTodolist({match}) {
     // eslint-disable-next-line
     // const [memorize, setMemorize] = useState('')
-    const [content, setContent] = useState()
+    const [todos, setTodos] = useState()
 
     /*Hàm này được chạy khi có sự thay đổi ví dụ như delete, create, update item => componentDidUpdate */
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function ViewTodolist({match}) {
         const getApi = async () => {
             try {
                 const getawait = await callApi.get()
-                setContent(getawait.data)
+                setTodos(getawait.data)
             }
             catch {
                 console.log('get fail')
@@ -26,8 +26,6 @@ export default function ViewTodolist({match}) {
     }, []); 
     
     const handleCreate = (e) => {
-        console.log('parent', e);
-        // const memorize = e.target.value
         const items = {
             name: e,
             status: 'new'
@@ -36,7 +34,7 @@ export default function ViewTodolist({match}) {
             try {
                 await callApi.create(items)
                 const addsawait = await callApi.get({})
-                setContent(addsawait.data)
+                setTodos(addsawait.data)
             }
             catch {
                 console.log('Create faild');
@@ -47,13 +45,13 @@ export default function ViewTodolist({match}) {
         //     if (memorize !== '')
     }
 
-    const handleDelete = (event) => {
-        const idList = event.id
+    const handleDelete = (e) => {
+        const idList = e.id
         const deletes = async () => {
             try {
                 await callApi.deletes(idList)
                 const deletesawait = await callApi.get({})
-                setContent(deletesawait.data)
+                setTodos(deletesawait.data)
             }
             catch {
                 console.log('delete faild');
@@ -63,8 +61,8 @@ export default function ViewTodolist({match}) {
         deletes ()
     }
 
-    const handChange = (event, items) => {
-        setContent(_.map(content, (i, index) => i = _.assign(i, { did: items.id === i.id ? event.checked : i.did })))
+    const handChange = (e, items) => {
+        setTodos(_.map(todos, (i, index) => i = _.assign(i, { did: items.id === i.id ? e.checked : i.did })))
     }
 
     return (
@@ -78,7 +76,7 @@ export default function ViewTodolist({match}) {
                     <BtnAddWork handleCreate={handleCreate}/>
                 </div>
                 {/* list work item */}
-                <ListWork content={content} handleDelete={handleDelete} handChange={handChange}/>
+                <ListWork todos={todos} handleDelete={handleDelete} handChange={handChange}/>
             </div>
         </div>
     )
