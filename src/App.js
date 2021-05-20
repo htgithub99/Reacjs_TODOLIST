@@ -8,6 +8,7 @@ import {
   
 } from "react-router-dom";
 import { routes } from './routes';
+import { StoreProvider } from './store/StoreContext';
 
 function App() {
   
@@ -15,16 +16,18 @@ function App() {
     _.map(routes, (route, index) => {
 
       return (
-        <Router>
-          <Switch>
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.components}
-            />
-          </Switch>
-        </Router>
+        <StoreProvider>
+          <Router>
+            <Switch>
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.components}
+              />
+            </Switch>
+          </Router>
+        </StoreProvider>
       )
     })
   )

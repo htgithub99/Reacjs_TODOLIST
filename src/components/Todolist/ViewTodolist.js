@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 import React, { useState, useEffect } from 'react';
 import FormAddWork from './FormAddWork';
+import FormEditWork from './FormEditWork'
 import ListWork from './ListWork';
 import callApi from '../../api/admin/callApi';
 
@@ -71,6 +72,7 @@ export default function ViewTodolist({match}) {
                     <FormAddWork handleCreate={handleCreate} />
                 </div>
                 {/* list work item */}
+                <FormEditWork />
                 <ListWork todos={todos} handleDelete={handleDelete} handChange={handChange}/>
             </div>
         </div>

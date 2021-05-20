@@ -61,6 +61,11 @@ body {
         ul {
             margin: 0;
             padding: 0;
+            list-style-type: georgian;
+            li {
+                text-transform: capitalize;
+                cursor: pointer;
+            }
         }
         .todolist___work---button {
             .bg__status_new {
