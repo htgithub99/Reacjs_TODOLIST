@@ -9,6 +9,7 @@ export default function ViewTodolist({match}) {
     // eslint-disable-next-line
     // const [memorize, setMemorize] = useState('')
     const [todos, setTodos] = useState()
+    const [todoEdit, setTodoEdit] = useState()
 
     /*Hàm này được chạy khi có sự thay đổi ví dụ như delete, create, update item => componentDidUpdate */
     useEffect(() => {
@@ -59,8 +60,8 @@ export default function ViewTodolist({match}) {
         deletes ()
     }
 
-    const handChange = (e, items) => {
-        setTodos(_.map(todos, (i, index) => i = _.assign(i, { did: items.id === i.id ? e.checked : i.did })))
+    const handChange = (item) => {
+        setTodoEdit(item)
     }
 
     return (
@@ -72,7 +73,7 @@ export default function ViewTodolist({match}) {
                     <FormAddWork handleCreate={handleCreate} />
                 </div>
                 {/* list work item */}
-                <FormEditWork />
+                <FormEditWork todoEdit={todoEdit}/>
                 <ListWork todos={todos} handleDelete={handleDelete} handChange={handChange}/>
             </div>
         </div>
