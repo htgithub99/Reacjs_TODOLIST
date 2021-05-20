@@ -24,11 +24,7 @@ export default function ViewTodolist({match}) {
         getApi()
     }, []); 
     
-<<<<<<< HEAD
-    const handleCreate = (e) => {
-=======
     const handleCreate = (todo) => {
->>>>>>> c355006f6734336d9e8b68eb49e71eb59405475b
         const items = {
             name: todo,
             status: 'new'
