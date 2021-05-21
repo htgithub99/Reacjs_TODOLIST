@@ -8,7 +8,6 @@ import {
   
 } from "react-router-dom";
 import { routes } from './routes';
-import { StoreProvider } from './store/StoreContext';
 
 function App() {
   
@@ -16,7 +15,6 @@ function App() {
     _.map(routes, (route, index) => {
 
       return (
-        <StoreProvider>
           <Router>
             <Switch>
               <Route
@@ -27,7 +25,6 @@ function App() {
               />
             </Switch>
           </Router>
-        </StoreProvider>
       )
     })
   )

@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import { useForm } from 'react-hook-form';
-import { Modal, Form, Button } from 'react-bootstrap';
-import { StoreContext } from "../../store/StoreContext"
+import React, { useState, useEffect } from 'react'
 import * as _ from 'lodash'
 
-export default function FormEditWork () {
-    const { changes, setModalContext } = useContext(StoreContext)
-    const { is, items } = changes
-    // const [ edit, setEdit ] = useState( items )
+export default function FormEditWork ({todoStatus, handleUpdatStatus}) {
+    const [check, setCheck ] = useState(false)
+
+    useEffect(() => {
+        todoStatus ? setCheck(todoStatus?.is) : setCheck('')
+      }, [todoStatus])
+
     const STATUS_TODO = [
         {
             status: 'done', value: 1
@@ -22,56 +22,38 @@ export default function FormEditWork () {
             status: 'pedding', value: 4
         }
     ]
-    const status = _.filter(STATUS_TODO, i => i.status === items?.status)
 
-    let defaultValues = {
-        name: items?.name,
-        status: status[0]?.value,
-    };
-    const { handleSubmit, register } = useForm({ defaultValues });
-    const handleOk = (data, id) => {
-       console.log(data, id);
+    const handleStatus = (item) => {
+        const allItem = {
+            name: todoStatus.items?.name,
+            status: item
+        }
+        handleUpdatStatus(allItem, todoStatus.items?.id)
     }
-    console.log(status[0]?.value);
     return (
         <>
-            <Modal
-                animation={false}
-                size="xs"
-                show={is}
-                onHide={() => setModalContext()}
-                aria-labelledby="example-modal-sizes-title-lg" 
-            >
-            <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">
-                Modal Update
-            </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmit(data => handleOk(data, items?.id))}>
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control 
-                        type="text"
-                        {...register('name', { required: "This is required message" })}
-                        />
-                    </Form.Group>
-                    <Form.Label>Status</Form.Label>
-                    <Form.Control as="select" {...register('status', { required: "This is required message" })}>
-                    {
-                        _.map(STATUS_TODO, i => {
-                            return (
+            <div style={{display: check ? 'block' : 'none', backgroundColor: '#ffffff', 
+            padding: '30px', 
+            boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', 
+            borderRadius: '6px',
+            position: 'fixed',
+            top: '70px',
+            width: '435px'
 
-                                <option key={i.value} value={i.value}>{i.status}</option>
-                            )
+            }}>
+                <h4 style={{textAlign: 'center'}}>Thay đổi status</h4>
+                <select defaultValue={3} onChange={(event) => handleStatus(event.target.value)} placeholder="Select semester" className="w-100 select_open">
+                {
+                    _.map(STATUS_TODO, i => {
+                        return (
+                            <option key={i.value} value={i.status}>{i.status}</option>
+                        )
+                    })
+                }
+                </select>
 
-                        })
-                    }
-                    </Form.Control>
-                    <Button type="submit" className="mt-3 d-flex" variant="outline-success">Success</Button>
-                </Form>
-            </Modal.Body>
-            </Modal>
+                <button onClick={(() => {setCheck(false); handleUpdatStatus()})} className="submit_end mt-3">Cập nhật</button>
+            </div>
         </>
     )
 }

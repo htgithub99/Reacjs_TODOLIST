@@ -7,12 +7,13 @@ body {
 }
 .todolist {
     margin: 0 auto;
-    background: white;
+    background: #edf1f7;
     border-radius: 9px;
     border: 1px solid #e7ecfb;
     box-shadow: 0 0 30px rgba(211, 220, 248, .3);
     padding: 30px;
     width: 500px;
+    position: relative;
 
     .top___todolist {
         .top___todolist---input {
@@ -25,7 +26,7 @@ body {
                 border-radius: 9px;
                 color: #666f99;
                 padding: 9px 18px;
-                width: 90%;
+                width: 100%;
 
                 &:focus {
                     outline: none;
@@ -100,4 +101,28 @@ body {
     .bg__todolist {
         background: #99FF66;
     }
+}
+
+.submit_end {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #0b6ab0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.36;
+    font-style: italic;
+    text-align: left;
+    color: #ffffff;
+}
+
+.select_open {
+    padding: 11px 10px 10px;
+    border-radius: 6px;
+    border: solid 1px #d8d8d8;
+    background-color: #ffffff;
+    font-size: 14px;
+    line-height: 1.36;
+    text-align: left;
+    color: #202223;
+    text-transform: capitalize;
 }
