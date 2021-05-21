@@ -1,13 +1,13 @@
 import * as _ from 'lodash'
 import WorkItem from './WorkItem';
 
-const ListWork =  ({todos, handChange, handleDelete}) => {
+const ListWork =  ({todos, handChange, handleDelete, handChangeStatus}) => {
     return (
         <div>
             {
                 _.map(todos, (items, index) => {
                     return (
-                        <WorkItem key={items.id} items={items} handleDelete={handleDelete} handChange={handChange}/>
+                        <WorkItem key={items.id} items={items} handleDelete={handleDelete} handChangeStatus={handChangeStatus} handChange={handChange}/>
                     )
                 })
             }

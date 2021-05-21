@@ -15,16 +15,16 @@ function App() {
     _.map(routes, (route, index) => {
 
       return (
-        <Router>
-          <Switch>
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.components}
-            />
-          </Switch>
-        </Router>
+          <Router>
+            <Switch>
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.components}
+              />
+            </Switch>
+          </Router>
       )
     })
   )

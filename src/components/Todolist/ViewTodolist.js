@@ -1,13 +1,23 @@
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 import React, { useState, useEffect } from 'react';
 import FormAddWork from './FormAddWork';
 import ListWork from './ListWork';
+import FormEditWork from './FormEditWork'
 import callApi from '../../api/admin/callApi';
 
 export default function ViewTodolist({match}) {
     // eslint-disable-next-line
-    // const [memorize, setMemorize] = useState('')
     const [todos, setTodos] = useState()
+    const [todoStatus, setTodoStatus] = useState(
+        {
+            is: false,
+            items: ''
+        }
+    )
+    const [todoEdit, setTodoEdit] = useState({
+        is: false,
+        items: ''
+    })
 
     /*Hàm này được chạy khi có sự thay đổi ví dụ như delete, create, update item => componentDidUpdate */
     useEffect(() => {
@@ -24,7 +34,7 @@ export default function ViewTodolist({match}) {
         getApi()
     }, []); 
     
-    const handleCreate = (todo) => {
+    const handleAllFunction = (todo, id) => {
         const items = {
             name: todo,
             status: 'new'
@@ -39,7 +49,37 @@ export default function ViewTodolist({match}) {
                 console.log('Create faild');
             }
         }
-        adds()
+
+        const updates = async () => {
+            try {
+                await callApi.update(items, id)
+                const updatesawait = await callApi.get({})
+                setTodos(updatesawait.data)
+            }
+            catch {
+                console.log('Create faild');
+            }
+        }
+        if (id !== undefined) {
+            updates()
+            setTodoEdit('')
+        } else
+            adds()
+    }
+
+    const handleUpdatStatus = (todo, id) => {
+        const updateStatus = async () => {
+            try {
+                await callApi.update(todo, id)
+                const statussawait = await callApi.get({})
+                setTodos(statussawait.data)
+            }
+            catch {
+                console.log('Create faild');
+            }
+        }
+
+        updateStatus()
     }
 
     const handleDelete = (e) => {
@@ -58,8 +98,18 @@ export default function ViewTodolist({match}) {
         deletes ()
     }
 
-    const handChange = (e, items) => {
-        setTodos(_.map(todos, (i, index) => i = _.assign(i, { did: items.id === i.id ? e.checked : i.did })))
+    const handChange = (item) => {
+        setTodoEdit({
+            is: true,
+            items: item
+        })
+    }
+
+    const handChangeStatus = (item) => {
+        setTodoStatus({
+            is: true,
+            items: item
+        })
     }
 
     return (
@@ -68,10 +118,11 @@ export default function ViewTodolist({match}) {
                 <div style={{textAlign: 'center'}}> To do List </div>
                 <div className="top___todolist">
                     {/* form add work item */}
-                    <FormAddWork handleCreate={handleCreate} />
+                    <FormAddWork todoEdit={todoEdit} handleAllFunction={handleAllFunction} handChange={handChange}/>
                 </div>
                 {/* list work item */}
-                <ListWork todos={todos} handleDelete={handleDelete} handChange={handChange}/>
+                <FormEditWork todoStatus={todoStatus} handleUpdatStatus={handleUpdatStatus}/>
+                <ListWork todos={todos} handleDelete={handleDelete} handChangeStatus={handChangeStatus} handChange={handChange}/>
             </div>
         </div>
     )

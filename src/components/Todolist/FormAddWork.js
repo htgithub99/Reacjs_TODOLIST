@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function FormAddWork({ handleCreate }) {
-  const [memorize, setMemorize] = useState("");
-
+export default function FormAddWork({ handleAllFunction, todoEdit }) {
+  const [memorize, setMemorize] = useState('');
   const handelCreateChild = (e) => {
     if (e.key === "Enter" && memorize !== '') {
-      handleCreate(memorize);
-      setMemorize("");
+      handleAllFunction(memorize, todoEdit.items?.id);
+      setMemorize('');
     } else {
       setMemorize(e.target.value);
     }
   };
+  useEffect(() => {
+    todoEdit ? setMemorize(todoEdit.items?.name) : setMemorize('')
+  }, [todoEdit])
 
   return (
     <>
@@ -24,7 +26,7 @@ export default function FormAddWork({ handleCreate }) {
       </div>
       <div className="top___todolist---submit">
           <button onClick={() => {
-            handleCreate(memorize);
+            handleAllFunction(memorize, todoEdit.items?.id);
             setMemorize("");
           }}>Create</button>
       </div>
