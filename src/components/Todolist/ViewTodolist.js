@@ -1,5 +1,6 @@
 // import * as _ from 'lodash'
 import React, { useState, useEffect } from 'react';
+import * as _ from 'lodash'
 import FormAddWork from './FormAddWork';
 import ListWork from './ListWork';
 import FormEditWork from './FormEditWork'
@@ -98,18 +99,42 @@ export default function ViewTodolist({match}) {
         deletes ()
     }
 
-    const handChange = (item) => {
+    const handleChange = (item) => {
         setTodoEdit({
             is: true,
             items: item
         })
     }
 
-    const handChangeStatus = (item) => {
+    const handleChangeStatus = (item) => {
         setTodoStatus({
             is: true,
             items: item
         })
+    }
+
+    const handleAllChecked = (e, items) => {
+        setTodos(_.map(todos, i => i = _.assign(i, { selected: i.id === items.id ? e : i.selected })))
+    }
+
+    const handleDeleteAll = () => {
+        const idDelete = []
+        _.map(todos, i => {
+            if (i.selected === true ) {
+                idDelete.push(i.id)
+            }
+        })
+        ;(async function deletes() {
+            try {
+                const deletePromise = new Promise((results, erros) => _.map(idDelete, (i) => results(callApi.deletes(i))))
+                await deletePromise
+                const deletesawait = await callApi.get({})
+                setTodos(deletesawait.data)
+            }
+            catch {
+                console.log('delete faild');
+            }
+        })()
     }
 
     return (
@@ -118,11 +143,11 @@ export default function ViewTodolist({match}) {
                 <div style={{textAlign: 'center'}}> To do List </div>
                 <div className="top___todolist">
                     {/* form add work item */}
-                    <FormAddWork todoEdit={todoEdit} handleAllFunction={handleAllFunction} handChange={handChange}/>
+                    <FormAddWork todoEdit={todoEdit} handleAllFunction={handleAllFunction} handleChange={handleChange}/>
                 </div>
                 {/* list work item */}
                 <FormEditWork todoStatus={todoStatus} handleUpdatStatus={handleUpdatStatus}/>
-                <ListWork todos={todos} handleDelete={handleDelete} handChangeStatus={handChangeStatus} handChange={handChange}/>
+                <ListWork todos={todos} handleDeleteAll={handleDeleteAll} handleDelete={handleDelete} handleChangeStatus={handleChangeStatus} handleChange={handleChange} handleAllChecked={handleAllChecked}/>
             </div>
         </div>
     )

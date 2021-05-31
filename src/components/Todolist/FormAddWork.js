@@ -20,7 +20,7 @@ export default function FormAddWork({ handleAllFunction, todoEdit }) {
         <input
           type="text"
           onChange={(e) => handelCreateChild(e)}
-          value={memorize}
+          value={memorize ? memorize : ''}
           onKeyDown={(e) => handelCreateChild(e)}
         />
       </div>
