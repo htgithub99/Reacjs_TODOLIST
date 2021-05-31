@@ -1,17 +1,22 @@
 import * as _ from 'lodash'
 import WorkItem from './WorkItem';
 
-const ListWork =  ({todos, handChange, handleDelete, handChangeStatus}) => {
+const ListWork =  ({todos, handleChange, handleDelete, handleChangeStatus, handleAllChecked, handleDeleteAll}) => {
     return (
+        <>
         <div>
             {
                 _.map(todos, (items, index) => {
                     return (
-                        <WorkItem key={items.id} items={items} handleDelete={handleDelete} handChangeStatus={handChangeStatus} handChange={handChange}/>
+                        <WorkItem key={items.id} handleAllChecked={handleAllChecked} items={items} handleDelete={handleDelete} handleChangeStatus={handleChangeStatus} handleChange={handleChange}/>
                     )
                 })
             }
         </div>
+        <div>
+          <button onClick={() => handleDeleteAll()}>Delete All</button>
+        </div>
+        </>
     )
 } 
 
